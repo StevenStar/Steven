@@ -1,0 +1,66 @@
+<% include ../header.ejs %>
+
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12 col-md-12">
+                <ol class="breadcrumb">
+                    <li>
+                        <i class="fa fa-dashboard"></i>  <a href="/blog/admin">管理</a>
+                    </li>
+                    <li>
+                        <i class="fa fa-dashboard"></i>  <a href="/blog/admin/music/1/index">音乐管理</a>
+                    </li>
+                    <li class="active">
+                        <i class="fa fa-file"></i> 添加音乐
+                    </li>
+                </ol>
+            </div>
+            <hr>
+            <div class="col-xs-6 col-xs-offset-2 col-md-3 col-md-offset-4">
+                <h3 style="padding-bottom: 10px;margin-left: -10px">添加音乐</h3>
+                <div style="margin: 10px 0">
+                    <% if (typeof(error) !== 'undefined' && error) { %>
+                    <div class="alert alert-warning alert-dismissible fade in">
+                        <a class="close" data-dismiss="alert" href="#">&times;</a>
+                        <strong><%= error %></strong>
+                    </div>
+                    <% } %>
+                    <% if (typeof(success) !== 'undefined' && success) { %>
+                    <div class="alert alert-success alert-dismissible fade in">
+                        <a class="close" data-dismiss="alert" href="#">&times;</a>
+                        <strong><%= success %></strong>
+                    </div>
+                    <% } %>
+                </div>
+                <form role="form" method="post" action="/blog/admin/music/add" enctype="multipart/form-data">
+                    <fieldset>
+                        <div class="form-group">
+                            <label for="music_name">歌曲</label>
+                            <input value="Angel" type="text" name="music_name" class="form-control" id="music_name" placeholder="歌曲">
+                        </div>
+                        <div class="form-group">
+                            <label for="music_author">作者</label>
+                            <input value="Steven" type="text" name="music_author" class="form-control" id="music_author" placeholder="作者">
+                        </div>
+                        <div class="form-group">
+                            <label for="music_albumname">专辑</label>
+                            <input value="星系" type="text" name="music_albumname" class="form-control" id="music_albumname" placeholder="专辑">
+                        </div>
+                        <div>
+                            <label for="music_info">简介</label>
+                            <input value="太空" type="text" name="music_info" class="form-control" id="music_info" placeholder="简介">
+                        </div>
+                        <div class="form-group">
+                            <label for="music_file">文件</label>
+                            <input type="file" class="form-control" name="music_file" id="music_filename">
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">确定添加</button>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<% include ../footer.ejs %>

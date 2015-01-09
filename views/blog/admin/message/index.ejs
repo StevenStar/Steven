@@ -1,0 +1,98 @@
+<% include ../header.ejs %>
+
+<div id="page-wrapper">
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12 col-md-12">
+                <ol class="breadcrumb">
+                    <li>
+                        <i class="fa fa-dashboard"></i>  <a href="/blog/admin">管理</a>
+                    </li>
+                    <li class="active">
+                        <i class="fa fa-file"></i> 留言列表
+                    </li>
+                </ol>
+            </div>
+            <hr>
+            <div class="col-sm-9 col-sm-offset-2 col-md-6 col-md-offset-2">
+                <div class="ul-header">
+                    <div class="alert alert-info alert-dismissible fade in" role="alert">
+                        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                        <h4>留言管理!</h4>
+                        <ol>
+                            <li> 查询留言</li>
+                            <li> 删除留言</li>
+                        </ol>
+                    </div>
+                </div>
+                <div style="margin: 10px 0">
+                    <% if (typeof(error) !== 'undefined' && error) { %>
+                    <div class="alert alert-warning alert-dismissible fade in">
+                        <a class="close" data-dismiss="alert" href="#">&times;</a>
+                        <strong><%= error %></strong>
+                    </div>
+                    <% } %>
+                    <% if (typeof(success) !== 'undefined' && success) { %>
+                    <div class="alert alert-success alert-dismissible fade in">
+                        <a class="close" data-dismiss="alert" href="#">&times;</a>
+                        <strong><%= success %></strong>
+                    </div>
+                    <% } %>
+                </div>
+                <ul class="list-group">
+                    <% if (messages && messages.length !== 0) {
+                            messages.forEach(function(message) { %>
+                    <li class="left list-group-item">
+                        <span class="chat-img pull-left" style="padding-right: 10px;color: #55C1E7;">
+                            <i class="fa fa-envelope fa-4x"></i>
+                        </span>
+                        <div class="header">
+                            <strong class="primary-font"><%= message.message_nickname %></strong>
+                            <small class="pull-right text-muted">
+                                <i class="fa fa-clock-o fa-fw"></i> <%= tools.dateFormat(message.message_created, true) %>
+                            </small>
+                        </div>
+                        <p>
+                            <%= message.message_ip %>
+                            <a href="/blog/admin/message/<%= message._id%>/del" class="btn btn-xs btn-danger pull-right" style="margin-left: 5px">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                            <a href="/blog/admin/message/detail?id=<%= message._id%>" class="btn btn-xs btn-info pull-right">详细 >></a>
+                        </p>
+                    </li>
+                    <% });
+                    } else { %>
+                    <li>
+                        <div class="alert alert-warning alert-dismissible fade in">
+                            <a class="close" data-dismiss="alert" href="#">&times;</a>
+                            <strong>您还没有留言。。。</strong>
+                        </div>
+                    </li>
+                    <% } %>
+                </ul>
+                <nav class="pull-right">
+                    <ul class="pagination pagination-sm">
+                        <%
+                        if (page > 1 && page <= total) {
+                        %>
+                        <li><a href="/blog/admin/message/<%= page - 1 %>/index">&laquo;</a></li>
+                        <%
+                        }
+                        %>
+                        <li><a href="javascript:void(0)"><%= page %></a></li>
+                        <%
+                        if (page > 0 && page < total) {
+                        %>
+                        <li><a href="/blog/admin/message/<%= page + 1 %>/index">&raquo;</a></li>
+                        <%
+                        }
+                        %> 
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+
+<% include ../footer.ejs %>

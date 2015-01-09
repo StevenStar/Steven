@@ -1,0 +1,67 @@
+<% include inc/header.ejs %>
+<% include inc/navbar.ejs %>
+
+<div id="content" class="container" style="background: #ffffff;padding: 5px 10px 50px 10px">
+    <div class="col-sm-12 col-md-12">
+        <ol class="breadcrumb">
+            <li>
+                <i class="fa fa-dashboard"></i>  <a href="/blog"> 博客 </a>
+            </li>
+            <li class="active">
+                <i class="fa fa-image"> 图片 </i>
+            </li>
+        </ol>
+    </div>
+    <hr>
+    <% if (typeof(pictures) !== 'undefined' && pictures.length > 0) {
+            pictures.forEach(function(picture) {
+    %>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-1">
+            <a href="#">
+                <img class="img-responsive" src="/<%= picture.picture_filename %>" alt="" width="100%">
+            </a>
+        </div>
+        <div class="col-md-5">
+            <h3><%= picture.picture_name %></h3>
+            <h4><small>简介</small></h4>
+            <p><%= picture.picture_info %></p>
+        </div>
+    </div>
+    <!-- /.row -->
+
+    <hr>
+    <%
+    });
+    } else {
+    %>
+    <div class="col-sm-12 col-md-12">
+        <div class="alert alert-warning alert-dismissible fade in">
+            <a class="close" data-dismiss="alert" href="#">&times;</a>
+            <strong> 当前没有可显示的图片。。。</strong>
+        </div>
+    </div>
+    <% } %>
+    <div class="col-sm-12 col-md-12">
+        <ul class="pager">
+            <%
+            if (page > 1 && page <= total) {
+            %>
+            <li><a href="/blog/picture/<%= page - 1 %>/index">&laquo;</a></li>
+            <%
+            }
+            %>
+            <li><a href="javascript:void(0)"><%= page %></a></li>
+            <%
+            if (page > 0 && page < total) {
+            %>
+            <li><a href="/blog/picture/<%= page + 1 %>/index">&raquo;</a></li>
+            <%
+            }
+            %>            
+        </ul>
+    </div>
+</div>
+
+<% include inc/foot.ejs %>
+<% include inc/footer.ejs %>

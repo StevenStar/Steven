@@ -1,0 +1,46 @@
+<!-- body header -->
+<header>
+    <!-- navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top" id="top" role="banner">
+        <div class="container">
+            <div class="navbar-header">
+                <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="/" class="navbar-brand">个人首页</a>
+            </div>
+            <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="/blog">博客</a>
+                    </li>
+                    <li>
+                        <a href="/blog/share">分享</a>
+                    </li>
+                    <li>
+                        <a href="/blog/music">音乐</a>
+                    </li>
+                    <li>
+                        <a href="/blog/picture/1/index">照片</a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <% if (typeof(current_user) !== 'undefined') { %>
+                    <% if (typeof(unread) !== 'undefined' && unread != 0) { %>
+                    <li><a href="/blog/unread">未读消息<small class="label label-danger"><%= unread %></small></a></li>
+                    <% } %>
+                    <li><a href="/blog/admin"><%= current_user.user_nickname %></a></li>
+                    <li><a href="/blog/signout">退出</a></li>
+                    <% } else { %>
+                    <li><a href="/blog/signin">登录</a></li>
+                    <li><a href="/blog/signup">注册</a></li>
+                    <% } %>
+                    <li><a href="/blog/about">关于</a></li>
+                </ul>
+            </nav>
+        </div>
+    </nav>
+</header>

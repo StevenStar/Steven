@@ -1,0 +1,60 @@
+<% include ../header.ejs %>
+
+<div id="page-wrapper">
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12 col-md-12">
+                <ol class="breadcrumb">
+                    <li>
+                        <i class="fa fa-dashboard"></i>  <a href="/blog/admin">管理</a>
+                    </li>
+                    <li>
+                        <i class="fa fa-dashboard"></i>  <a href="/blog/admin/content/1/index">文章管理</a>
+                    </li>
+                    <li class="active">
+                        <i class="fa fa-file"></i> 添加文章
+                    </li>
+                </ol>
+            </div>
+            <hr>
+            <div class="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2">
+                <h3 style="padding-bottom: 10px;margin-left: -10px">添加文章</h3>
+                <div style="margin: 10px 0">
+                    <% if (typeof(error) !== 'undefined' && error) { %>
+                    <div class="alert alert-warning alert-dismissible fade in">
+                        <a class="close" data-dismiss="alert" href="#">&times;</a>
+                        <strong><%= error %></strong>
+                    </div>
+                    <% } %>
+                    <% if (typeof(success) !== 'undefined' && success) { %>
+                    <div class="alert alert-success alert-dismissible fade in">
+                        <a class="close" data-dismiss="alert" href="#">&times;</a>
+                        <strong><%= success %></strong>
+                    </div>
+                    <% } %>
+                </div>
+                <form role="form" method="post" action="/blog/admin/content/add">
+                    <fieldset>
+                        <div class="form-group">
+                            <label for="content_title">标题</label>
+                            <input value="视频分享" type="text" name="content_title" class="form-control" id="content_title" placeholder="标题">
+                        </div>
+                        <div class="form-group">
+                            <label for="content_label">标签</label>
+                            <input value="标签" type="text" name="content_label" class="form-control" id="content_label" placeholder="标签">
+                        </div>
+                        <div class="form-group">
+                            <textarea name="content_text" data-provide="markdown" rows="12"></textarea>
+                        </div>
+                        <div class="form-group col-xs-4 col-md-3 col-lg-2">
+                            <button type="submit" class="btn btn-primary btn-block">确定添加</button>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<% include ../footer.ejs %>

@@ -1,0 +1,160 @@
+<% include ../header.ejs %>
+
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12 col-md-12">
+                <ol class="breadcrumb">
+                    <li>
+                        <i class="fa fa-dashboard"></i>  <a href="/blog/admin"> 管理 </a>
+                    </li>
+                    <li>
+                        <i class="fa fa-users"></i>  <a href="/blog/admin/user"> 管理员列表 </a>
+                    </li>
+                    <li class="active">
+                        <i class="fa fa-user"> 管理员详细信息 </i>
+                    </li>
+                </ol>
+            </div>
+            <hr>
+            <div class="col-xs-9 col-xs-offset-2 col-md-6 col-md-offset-3">
+                <h3 style="padding-bottom: 10px;margin-left: -10px">管理员详细信息</h3>
+                <div style="margin: 10px 0">
+                    <% if (typeof(error) !== 'undefined' && error) { %>
+                    <div class="alert alert-warning alert-dismissible fade in">
+                        <a class="close" data-dismiss="alert" href="#">&times;</a>
+                        <strong><%= error %></strong>
+                    </div>
+                    <% } %>
+                    <% if (typeof(success) !== 'undefined' && success) { %>
+                    <div class="alert alert-success alert-dismissible fade in">
+                        <a class="close" data-dismiss="alert" href="#">&times;</a>
+                        <strong><%= success %></strong>
+                    </div>
+                    <% } %>
+                </div>
+                <form role="form" method="post" action="/blog/admin/user/<%= user._id %>/update" style="padding: 10px">
+                    <fieldset>
+                        <div class="form-group">
+                            <label for="user_nickname" class="col-sm-3 col-md-4 control-label">昵称</label>
+                            <div class="col-sm-9 col-md-8">
+                                <input type="text" class="form-control" name="user_nickname" id="user_nickname" placeholder="邮箱" value="<%= user.user_nickname%>" readonly>
+                            </div>
+                        </div>
+                        <br> <br>
+                        <div class="form-group">
+                            <label for="user_email" class="col-sm-3 col-md-4 control-label">邮箱</label>
+                            <div class="col-sm-9 col-md-8">
+                                <input type="text" class="form-control" name="user_email" id="user_email" placeholder="邮箱" value="<%= user.user_email%>" readonly>
+                            </div>
+                        </div>
+                        <br> <br>
+                        <div class="form-group">
+                            <label for="user_qq" class="col-sm-3 col-md-4 control-label">QQ</label>
+                            <div class="col-sm-9 col-md-8">
+                                <input type="text" class="form-control" name="user_qq" id="user_qq" placeholder="QQ" value="<%= user.user_qq%>">
+                            </div>
+                        </div>
+                        <br> <br>
+                        <div class="form-group">
+                            <label for="user_isadmin" class="col-sm-3 col-md-4 control-label">权限</label>
+                            <div class="col-sm-9 col-md-8">
+                                <label>
+                                    <input type="radio" name="user_isadmin" value="0" <% if (user.user_isadmin) { %>checked<% } %> >
+                                    是
+                                </label>
+                                <label>
+                                    <input type="radio" name="user_isadmin" value="1" <% if (!user.user_isadmin) { %>checked<% } %> >
+                                    否
+                                </label>
+                            </div>
+                        </div>
+                        <br> <br>
+                        <div class="form-group">
+                            <label for="user_label" class="col-sm-3 col-md-4 control-label">标签</label>
+                            <div class="col-sm-9 col-md-8">
+                                <input type="text" class="form-control" name="user_label" id="user_label" placeholder="标签" value="<%= user.user_label%>">
+                            </div>
+                        </div>
+                        <br> <br>
+                        <div class="form-group">
+                            <label for="user_phone" class="col-sm-3 col-md-4 control-label">手机号码</label>
+                            <div class="col-sm-9 col-md-8">
+                                <input type="text" class="form-control" name="user_phone" id="user_phone" placeholder="手机号码" value="<%= user.user_phone%>">
+                            </div>
+                        </div>
+                        <br> <br>
+                        <div class="form-group">
+                            <label for="user_sex" class="col-sm-3 col-md-4 control-label">性别</label>
+                            <div class="col-sm-9 col-md-8">
+                                <label>
+                                    <input type="radio" name="user_sex" value="male" <% if (user.user_sex && user.user_sex == 'male') { %>checked<% } %> >
+                                    男
+                                </label>
+                                <label>
+                                    <input type="radio" name="user_sex" value="female" <% if (user.user_sex && user.user_sex == 'female') { %>checked<% } %> >
+                                    女
+                                </label>
+                                <label>
+                                    <input type="radio" name="user_sex" value="secret" <% if (user.user_sex && user.user_sex == 'secret') { %>checked<% } %> >
+                                    保密
+                                </label>
+                            </div>
+                        </div>
+                        <br> <br>
+                        <div class="form-group">
+                            <label for="user_birthday" class="col-sm-3 col-md-4 control-label">生日</label>
+                            <div class="col-sm-9 col-md-8">
+                                <input type="text" class="form-control" name="user_birthday" id="user_birthday" placeholder="生日" value="<%= user.user_birthday%>">
+                            </div>
+                        </div>
+                        <br> <br>
+                        <div class="form-group">
+                            <label for="user_company" class="col-sm-3 col-md-4 control-label">公司</label>
+                            <div class="col-sm-9 col-md-8">
+                                <input type="text" class="form-control" name="user_company" id="user_company" placeholder="公司" value="<%= user.user_company%>">
+                            </div>
+                        </div>
+                        <br> <br>
+                        <div class="form-group">
+                            <label for="user_profession" class="col-sm-3 col-md-4 control-label">职业</label>
+                            <div class="col-sm-9 col-md-8">
+                                <input type="text" class="form-control" name="user_profession" id="user_profession" placeholder="职业" value="<%= user.user_profession%>">
+                            </div>
+                        </div>
+                        <br> <br>
+                        <div class="form-group">
+                            <label for="user_url" class="col-sm-3 col-md-4 control-label">个人网页</label>
+                            <div class="col-sm-9 col-md-8">
+                                <input type="text" class="form-control" name="user_url" id="user_url" placeholder="个人网页" value="<%= user.user_url%>">
+                            </div>
+                        </div>
+                        <br> <br>
+                        <div class="form-group">
+                            <label for="user_weibo" class="col-sm-3 col-md-4 control-label">微博</label>
+                            <div class="col-sm-9 col-md-8">
+                                <input type="text" class="form-control" name="user_weibo" id="user_weibo" placeholder="微博" value="<%= user.user_weibo%>">
+                            </div>
+                        </div>
+                        <br> <br>
+                        <div class="form-group">
+                            <label for="user_info" class="col-sm-3 col-md-4 control-label">简介</label>
+                            <div class="col-sm-9 col-md-8">
+                                <textarea class="form-control" name="user_info" id="user_info" rows="3" style="resize: none"><%= user.user_info%></textarea>
+                            </div>
+                        </div>
+                        <br> <br><br> <br>
+                        <div style="background: #e7e7e7;">
+                            <label class="col-sm-3 col-md-4 control-label"></label>
+                            <div class="col-sm-9 col-md-8">
+                                <button type="submit" class="btn btn-info btn-block" data-loading-test="修改中">确定修改</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<% include ../footer.ejs %>

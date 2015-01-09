@@ -1,0 +1,153 @@
+<% include inc/header.ejs %>
+<% include inc/navbar.ejs %>
+
+<main class="s-masthead" id="content" role="main">
+    <div class="container">
+        <img class="img-circle" src="/images/head.png" width="100" height="100" style="margin-top: 30px">
+
+        <p class="s-booticon s-booticon-lg">Welcome to <%= user.user_nickname %></p>
+
+        <p class="lead"><%= user.user_info %></p>
+
+        <p class="version">最后一次活动时间：<%= tools.dateFormat(user.user_actived, false) %></p>
+    </div>
+</main>
+<!-- body content-->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9 col-md-9 col-lg-9">
+            <% if (typeof(contents) !== 'undefined' && contents.length > 0) {
+                contents.forEach(function(content) {
+            %>
+            <div class="blog-post">
+                <h2 class="blog-post-title"><%= content.content_title %></h2>
+                <p class="blog-post-meta">
+                    <%= tools.dateFormat(content.content_created, true) %>
+                    <strong> By <a href="#"><%= user.user_nickname %></a></strong>
+                </p>
+                <hr>
+                <div class="md-preview"><%= content.content_text.substring(0, 100) %>...</div>
+                <p>
+                    <a href="/blog/content/<%= content._id %>" class="btn btn-xs btn-info">详细   >></a>
+                </p>
+            </div>
+            <%
+                });
+            } else {
+            %>
+            <div class="blog-post">
+                <div class="alert alert-warning alert-dismissible fade in">
+                    <a class="close" data-dismiss="alert" href="#">&times;</a>
+                    <strong> 当前没有可显示的文章。。。</strong>
+                </div>
+            </div>
+            <% } %>
+            <ul class="pager">
+                <%
+                if (page > 1 && page <= total) {
+                %>
+                <li><a href="/blog/index/<%= user.user_nickname %>/<%= page - 1 %>/index">上一页</a></li>
+                <%
+                }
+                if (page > 0 && page < total) {
+                %>
+                <li><a href="/blog/index/<%= user.user_nickname %>/<%= page + 1 %>/index">下一页</a></li>
+                <% 
+                }
+                %>
+            </ul>
+        </div>
+        <!-- /.blog-main -->
+
+        <div class="col-sm-3 col-md-3 col-lg-3" style="padding-top: 20px">
+            <div class="search">
+                <form class="navbar-search" action="/blog/search" method="post">
+                    <input type="text" name="key_word" class="search-query" placeholder="文章搜索">
+                </form>
+            </div>
+            <div class="sidebar-module">
+                <h4><span class="glyphicon glyphicon-user" style="padding-right:8px;"></span><strong>个人简介</strong></h4>
+                <ol class="list-unstyled">
+                    <li><p>昵称：<%= user.user_nickname %></p></li>
+                    <li><p>姓名：<%= user.user_realname %></p></li>
+                    <li><p>QQ：<%= user.user_qq %></p></li>
+                    <li><p>Email：<%= user.user_email %></p></li>
+                    <li><p>关注：Java \ NodeJS \ Python \ 后端开发 \ 前端开发\ 移动开发</p></li>
+                </ol>
+            </div>
+            <div class="sidebar-module">
+                <h4><span class="glyphicon glyphicon-user" style="padding-right:8px;"></span><strong>新浪微博</strong></h4>
+                <a href="#" class="WB_widgets WB_followButton" id="followBtn">
+                    <span class="FB_typeB" id="fStatus">
+                        <em class="WB_icon"></em>
+                        <span class="WB_icon_text" id="fText">加关注</span>
+                    </span>
+                    <span class="WB_FB_info">
+			            <a href="http://weibo.com/stevenjxw" title="vmeitime" target="_blank">vmeitime</a>
+                        <i class="FB_info_more">等人已关注</i>
+		            </span>
+                </a>
+                <ul class="list-inline">
+                    <li><a href="http://weibo.com/snoopychen" title="vmeitime" target="_blank"><img src="http://tp4.sinaimg.cn/1842658863/30/39998784595/1" alt=""></a></li>
+                    <li><a href="http://weibo.com/3246305460" title="XD王亮亮" target="_blank"><img src="http://tp1.sinaimg.cn/3246305460/30/5690730950/1" alt=""></a></li>
+                    <li><a href="http://weibo.com/huming168" title="胡明-移动web" target="_blank"><img src="http://tp2.sinaimg.cn/3777288253/30/5690722998/1" alt=""></a></li>
+                    <li><a href="http://weibo.com/ianmj" title="顾邑恩ian" target="_blank"><img src="http://tp2.sinaimg.cn/1078602353/30/22824679184/1" alt=""></a></li>
+                    <li><a href="http://weibo.com/sdink" title="斯达客" target="_blank"><img src="http://tp2.sinaimg.cn/1791393065/30/5634543052/1" alt=""></a></li>
+                    <li><a href="http://weibo.com/digno" title="跳楼的螃蟹" target="_blank"><img src="http://tp3.sinaimg.cn/1411211302/30/5634438372/1" alt=""></a></li>
+                </ul>
+            </div>
+            <div class="sidebar-module">
+                <h4><span class="glyphicon glyphicon-th-list" style="padding-right:8px;"></span><strong>文章分类</strong></h4>
+                <ol class="list-unstyled">
+                    <li><a href="#">March 2014</a></li>
+                    <li><a href="#">February 2014</a></li>
+                    <li><a href="#">January 2014</a></li>
+                    <li><a href="#">December 2013</a></li>
+                    <li><a href="#">November 2013</a></li>
+                    <li><a href="#">October 2013</a></li>
+                </ol>
+            </div>
+            <div class="sidebar-module">
+                <h4><span class="glyphicon glyphicon-heart" style="padding-right:8px;"></span><strong>标签</strong></h4>
+                <span class="label label-default">Default</span>
+                <span class="label label-primary">Primary</span>
+                <span class="label label-success">Success</span>
+                <span class="label label-info">Info</span>
+                <span class="label label-warning">Warning</span>
+                <span class="label label-danger">Danger</span>
+            </div>
+            <div class="sidebar-module">
+                <h4><span class="glyphicon glyphicon-user" style="padding-right:8px;"></span><strong>热门文章</strong></h4>
+                <ol class="list-unstyled">
+                    <li><a href="#">March 2014</a></li>
+                    <li><a href="#">February 2014</a></li>
+                    <li><a href="#">January 2014</a></li>
+                    <li><a href="#">December 2013</a></li>
+                    <li><a href="#">November 2013</a></li>
+                    <li><a href="#">October 2013</a></li>
+                </ol>
+            </div>
+            <div class="sidebar-module">
+                <h4><span class="glyphicon glyphicon-comment" style="padding-right:8px;"></span><strong>最新评论</strong></h4>
+                <ol class="list-unstyled">
+                    <li><a href="#">March 2014</a></li>
+                    <li><a href="#">February 2014</a></li>
+                    <li><a href="#">January 2014</a></li>
+                    <li><a href="#">December 2013</a></li>
+                    <li><a href="#">November 2013</a></li>
+                    <li><a href="#">October 2013</a></li>
+                </ol>
+            </div>
+            <div class="sidebar-module sidebar-module-inset">
+                <h4><span class="glyphicon glyphicon-link" style="padding-right:8px;"></span><strong>友情链接</strong></h4>
+                <p><a href="/" class="btn btn-link">Steven.Wang</a></p>
+            </div>
+        </div>
+        <!-- /.blog-sidebar -->
+
+    </div>
+    <!-- /.row -->
+</div>
+<!-- /.container -->
+<% include inc/foot.ejs %>
+<% include inc/footer.ejs %>

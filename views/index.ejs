@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <!-- 让部分国产浏览器默认采用高速模式渲染页面 -->
+    <meta name="renderer" content="webkit">
+    <!--  为了让 IE 浏览器运行最新的渲染模式下 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- 为了确保适当的绘制和触屏缩放，需要在 <head> 之中添加 viewport 元数据标签。 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--
+        禁用其缩放（zooming）功能  注意，这种方式我们并不推荐所有网站使用，还是要看你自己的情况而定！
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    -->
+    <meta name="description" content="Bootstrap - 简洁、直观、强悍、移动设备优先的前端开发框架，让web开发更迅速、简单。">
+    <meta name="keywords" content="HTML, CSS, JS, JavaScript, framework, bootstrap, front-end, frontend, web development">
+    <meta name="author" content="Steven, and Bootstrap contributors">
+    <title><%= title %></title>
+    <link rel="icon" href="images/head.png">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- css files -->
+    <link href="../stylesheets/bootstrap.css" rel="stylesheet">
+    <style>
+        video {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -100;
+            background-size: cover;
+        }
+        #polina {
+            background: rgba(0,0,0,0.3);
+            color: #fff;
+            padding: 10px 20px;
+            text-align: center;
+            margin-top: 12%;
+        }
+        #blog, #forum {
+            text-align: left;
+            padding: 1px 15px;
+            border-left: 6px solid #5bc0de;
+            margin: 5px 0;
+        }
+        #forum {
+            border-left: 6px solid #5cb85c;
+        }
+    </style>
+</head>
+<body>
+<video autoplay loop poster="../images/bg1.png" id="bgvideo">
+    <source src="../videoplayback.mp4" type="video/mp4">
+    <source src="http://www.webhek.com/demo2/video-background/polina.mp4" type="video/mp4">
+</video>
+<div class="container">
+    <div id="polina">
+        <h1>星系小站</h1>
+        <p>由王俊星亲自设计和使用，以后会增加各种有趣的东西，欢迎访问</p>
+        <div class="bs-callout bs-callout-warning" id="blog">
+            <h4>个人博客 <a href="/blog" class="btn btn-info btn-xs">访问</a></h4>
+            <p>由Nodejs + Express + MongoDB设计开发</p>
+            <p>暂时支持博主自己写文章，分享一些东西</p>
+        </div>
+        <div class="bs-callout bs-callout-warning" id="forum">
+            <h4>星系论坛 <a href="#" class="btn btn-success btn-xs">访问</a></h4>
+            <p>有时间再开发，或许永远都没有时间</p>
+        </div>
+    </div>
+</div>
+</body>
+</html>

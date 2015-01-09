@@ -1,0 +1,36 @@
+<% include inc/header.ejs %>
+<% include inc/navbar.ejs %>
+
+<div class="container" style="background: #fff;">
+    <div class="row" style="padding-top: 10%;padding-bottom: 20%">
+        <div class="col-xs-8 col-xs-offset-2 col-md-4 col-md-offset-4">
+            <h3 style="padding-bottom: 10px;margin-left: -10px">请填写登录信息</h3>
+            <% if (typeof(error) !== 'undefined' && error) { %>
+            <div class="alert alert-warning alert-dismissible fade in">
+                <a class="close" data-dismiss="alert" href="#">&times;</a>
+                <strong><%= error %></strong>
+            </div>
+            <% } %>
+            <form role="form" method="post" action="/blog/signin">
+                <fieldset>
+                    <div class="form-group">
+                        <input class="form-control" placeholder="E-mail" name="user_loginname" type="text" autofocus>
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" placeholder="Password" name="user_loginpass" type="password" value="">
+                    </div>
+       <!--             <div class="checkbox">
+                        <label>
+                            <input name="remember" type="checkbox" value="Remember Me">Remember Me
+                        </label>
+                    </div>-->
+                    <!-- Change this to a button or input when using this as a form -->
+                    <button type="submit" class="btn btn-info btn-block">确定登录</button>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+
+<% include inc/foot.ejs %>
+<% include inc/footer.ejs %>

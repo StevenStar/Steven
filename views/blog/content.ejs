@@ -1,0 +1,89 @@
+<% include inc/header.ejs %>
+<% include inc/navbar.ejs %>
+
+<div id="content" class="container" style="background: #ffffff;padding: 5px 10px 50px 10px">
+    <div class="row">
+        <div class="col-sm-12 col-md-12">
+            <ol class="breadcrumb">
+                <li>
+                    <i class="fa fa-dashboard"></i>  <a href="/blog"> 博客 </a>
+                </li>
+                <li class="active">
+                    <i class="fa fa-file"> 文章详细信息 </i>
+                </li>
+            </ol>
+        </div>
+        <div class="col-sm-12 col-md-12">
+            <h2 class="blog-post-title"><%= content.content_title %></h2>
+            <p class="blog-post-meta">
+                <%= tools.dateFormat(content.content_created, false) %> by
+                <strong><a href="#">Steven</a></strong>
+            </p>
+            <hr>
+            <div class="md-preview" data-provider="markdown-preview"><%= content.content_text %></div>
+        </div>
+        <div class="col-sm-12 col-md-12">
+            <p class="bg-success">共有<%= comments.length %>条评论</p>
+            <% if (comments.length > 0) {
+                    comments.forEach(function(comment) {
+            %>
+            <div class="media well">
+                <a class="pull-left" href="#">
+                    <i class="fa fa-user fa-3x"></i>
+                </a>
+                <div class="media-body">
+                    <h4 class="media-heading"><%= comment.comment_nickname %>
+                        <small><%= tools.dateFormat(comment.comment_created, true) %></small>
+                    </h4>
+                    <div class="md-preview" data-provide="markdown-preview"><%= comment.comment_text %></div>
+                    <%
+                    if (comment.comment_isreply) {
+                    %>
+                    <div class="media">
+                        <a class="pull-left" href="#">
+                            <i class="fa fa-user fa-3x"></i>
+                        </a>
+                        <div class="media-body">
+                            <h4 class="media-heading"><%= user.user_nickname %>
+                                <small><%= tools.dateFormat(comment.comment_updated, true) %></small>
+                            </h4>
+                            <%= comment.comment_reply %>
+                        </div>
+                    </div>
+                    <%
+                    }
+                    %>
+
+                    <!-- End Nested Comment -->
+                </div>
+            </div>
+            <%
+            });
+            }%>
+
+        </div>
+        <div class="col-sm-12 col-md-12">
+            <h4>评论</h4>
+            <form action="/blog/content/<%= content._id %>/comment" method="post" role="form" style="border: 1px solid #ccc;padding: 10px">
+                <div class="form-group">
+                    <label class="control-label" for="comment_nickname">昵称</label>
+                    <input type="text" class="form-control" id="comment_nickname" name="comment_nickname" placeholder="昵称">
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="comment_email">邮箱</label>
+                    <input type="text" class="form-control" id="comment_email" name="comment_email" placeholder="邮箱">
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="comment_text">评论内容</label>
+                    <textarea id="comment_text" name="comment_text" data-provide="markdown" rows="6"></textarea>
+                </div>
+                <p class="bg-danger" style="padding: 5px">友情提示：记得留下联系方式哦。</p>
+                <input type="hidden" name="user_id" value="<%=content.user_id %>">
+                <button type="submit" class="btn btn-xs btn-primary" type="button">提交 >></button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<% include inc/foot.ejs %>
+<% include inc/footer.ejs %>

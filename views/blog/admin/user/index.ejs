@@ -1,0 +1,83 @@
+<% include ../header.ejs %>
+
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12 col-md-12">
+                <ol class="breadcrumb">
+                    <li>
+                        <i class="fa fa-dashboard"></i>  <a href="/blog/admin">管理</a>
+                    </li>
+                    <li class="active">
+                        <i class="fa fa-users"></i> 管理员列表
+                    </li>
+                </ol>
+            </div>
+            <hr>
+            <div class="col-sm-9 col-sm-offset-2 col-md-6 col-md-offset-2">
+                <ul class="list-group">
+                    <% if (users) {
+                       users.forEach(function(user) { %>
+                    <li class="list-group-item">
+                        <div class="media">
+                            <a class="pull-left" href="#">
+                                <% if (user.user_profile_image_url) { %>
+                                <img class=" media-object" alt="头像" src="<%= user.user_profile_image_url %>" style="width: 64px; height: 64px;">
+                                <% } else { %>
+                                <i class="fa fa-user-md fa-4x"></i>
+                                <% } %>
+                            </a>
+                            <div class="media-body pull-left">
+                                <address>
+                                    昵称：<strong><%= user.user_nickname %></strong><br>
+                                    邮箱：<%= user.user_email %><br>
+                                    手机号码：<%= user.user_phone %>
+                                </address>
+                            </div>
+                            <div class="media-body pull-right text-right">
+                                <address>
+                                    qq：<%= user.user_qq %><br>
+                                    是否管理：<% if (user.user_isadmin) { %>
+                                    是
+                                    <% } else { %>
+                                    否
+                                    <% }%><br>
+                                    <a href="/blog/admin/user/<%=  user._id %>/detail" class="btn btn-xs btn-info">>> 详细</a>
+                                </address>
+                            </div>
+                        </div>
+                    </li>
+                    <%
+                        })
+                    } else {
+                    %>
+                    <li class="list-group-item">
+                        <p class="alert-warning" style="padding: 10px">当前没有用户。</p>
+                    </li>
+                    <% } %>
+                    </ul>
+                <nav class="pull-right">
+                    <ul class="pagination pagination-sm">
+                        <%
+                        if (page > 1 && page <= total) {
+                        %>
+                        <li><a href="/blog/admin/picture/<%= page - 1 %>/index">&laquo;</a></li>
+                        <%
+                        }
+                        %>
+                        <li><a href="javascript:void(0)"><%= page %></a></li>
+                        <%
+                        if (page > 0 && page < total) {
+                        %>
+                        <li><a href="/blog/admin/picture/<%= page + 1 %>/index">&raquo;</a></li>
+                        <%
+                        }
+                        %>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+
+<% include ../footer.ejs %>

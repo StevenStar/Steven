@@ -1,0 +1,40 @@
+<% include inc/header.ejs %>
+<% include inc/navbar.ejs %>
+
+<div class="container" style="background: #fff;padding-top: 50px">
+    <div class="row" style="padding: 30px 10px">
+        <div class="col-xs-8 col-xs-offset-2 col-md-4 col-md-offset-4">
+            <h3 style="padding-bottom: 10px;margin-left: -10px">请填写注册信息</h3>
+            <% if (typeof(error) !== 'undefined' && error) { %>
+            <div class="alert alert-error">
+                <a class="close" data-dismiss="alert" href="#">&times;</a>
+                <strong><%= error %></strong>
+            </div>
+            <% } %>
+            <form role="form" method="post" action="/blog/signup">
+                <fieldset>
+                    <div class="form-group">
+                        <label for="user_nickname">昵称</label>
+                        <input value="test" type="text" name="user_nickname" class="form-control" id="user_nickname" placeholder="昵称">
+                    </div>
+                    <div class="form-group">
+                        <label for="user_email">邮箱</label>
+                        <input value="wangjunxing123@126.com" type="text" name="user_email" class="form-control" id="user_email" placeholder="邮箱">
+                    </div>
+                    <div class="form-group">
+                        <label for="user_pass">登录密码</label>
+                        <input value="test" type="password" name="user_pass" class="form-control" id="user_pass" placeholder="登录密码">
+                    </div>
+                    <div class="form-group">
+                        <label for="user_repass">登录密码</label>
+                        <input value="test" type="password" name="user_repass" class="form-control" id="user_repass" placeholder="确认密码">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">确定注册</button>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+
+<% include inc/foot.ejs %>
+<% include inc/footer.ejs %>

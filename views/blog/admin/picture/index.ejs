@@ -1,0 +1,104 @@
+<% include ../header.ejs %>
+
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12 col-md-12">
+                <ol class="breadcrumb">
+                    <li>
+                        <i class="fa fa-dashboard"></i>  <a href="/blog/admin">管理</a>
+                    </li>
+                    <li class="active">
+                        <i class="fa fa-file"></i> 图片列表
+                    </li>
+                </ol>
+            </div>
+            <hr>
+            <div class="col-sm-9 col-sm-offset-2 col-md-6 col-md-offset-2">
+                <div class="ul-header">
+                    <div class="alert alert-info alert-dismissible fade in" role="alert">
+                        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                        <h4>图片管理!</h4>
+                        <ol>
+                            <li> 添加图片<a class="btn btn-link btn-xs" href="/blog/admin/picture/add" role="button">>></a></li>
+                            <li> 查询图片</li>
+                            <li> 删除图片</li>
+                        </ol>
+                        <div class="input-group col-md-6 col-md-offset-3">
+                            <input type="text" class="form-control" id="main_search" value="视频分享" placeholder="SEARCH ID">
+                            <div class="input-group-btn">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                    <span class="glyphicon glyphicon-search"></span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="margin: 10px 0">
+                    <% if (typeof(error) !== 'undefined' && error) { %>
+                    <div class="alert alert-warning alert-dismissible fade in">
+                        <a class="close" data-dismiss="alert" href="#">&times;</a>
+                        <strong><%= error %></strong>
+                    </div>
+                    <% } %>
+                    <% if (typeof(success) !== 'undefined' && success) { %>
+                    <div class="alert alert-success alert-dismissible fade in">
+                        <a class="close" data-dismiss="alert" href="#">&times;</a>
+                        <strong><%= success %></strong>
+                    </div>
+                    <% } %>
+                </div>
+                <ul class="list-group">
+                    <% if (pictures && pictures.length !== 0) {
+                            pictures.forEach(function(picture) { %>
+                    <li class="left list-group-item">
+                        <span class="chat-img pull-left" style="padding-right: 10px;color: #55C1E7;">
+                            <i class="fa fa-image fa-4x"></i>
+                        </span>
+                        <div class="header">
+                            <strong class="primary-font"><%= picture.picture_name %></strong>
+                            <small class="pull-right text-muted">
+                                <i class="fa fa-clock-o fa-fw"></i> <%= tools.dateFormat(picture.picture_created, true) %>
+                            </small>
+                        </div>
+                        <p>
+                            <%= picture.picture_info %>
+                            <a href="/blog/admin/picture/<%= picture._id%>/del" class="btn btn-xs btn-danger pull-right" style="margin-left: 5px">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        </p>
+                    </li>
+                    <% });
+                    } else { %>
+                    <li>
+                        <div class="alert alert-warning alert-dismissible fade in">
+                            <a class="close" data-dismiss="alert" href="#">&times;</a>
+                            <strong>您还没有图片。。。</strong>
+                        </div>
+                    </li>
+                    <% } %>
+                </ul>
+                <nav class="pull-right">
+                    <ul class="pagination pagination-sm">
+                        <%
+                        if (page > 1 && page <= total) {
+                        %>
+                        <li><a href="/blog/admin/picture/<%= page - 1 %>/index">&laquo;</a></li>
+                        <%
+                        }
+                        %>
+                        <li><a href="javascript:void(0)"><%= page %></a></li>
+                        <%
+                        if (page > 0 && page < total) {
+                        %>
+                        <li><a href="/blog/admin/picture/<%= page + 1 %>/index">&raquo;</a></li>
+                        <%
+                        }
+                        %> 
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+
+<% include ../footer.ejs %>

@@ -1,0 +1,67 @@
+<% include inc/header.ejs %>
+<% include inc/navbar.ejs %>
+
+<div class="container" style="background: #ffffff;padding: 20px 10px">
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#comment" role="tab" data-toggle="tab">评论</a></li>
+        <li role="presentation"><a href="#message" role="tab" data-toggle="tab">留言</a></li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="comment">
+            <div class="feed-activity-list" style="padding: 18px;">
+                <div class="feed-element"></div>
+                <%
+                if (typeof(comments) != "undefined") {
+                        comments.forEach(function(comment) {
+                %>
+                <div class="feed-element">
+                    <a href="#" class="pull-left">
+                        <i class="fa fa-user fa-3x img-circle"></i>
+                    </a>
+                    <div class="media-body ">
+                        <small class="pull-right"><%= tools.dateFormat(comment.comment_created, true) %></small>
+                        <strong><%= comment.comment_nickname %></strong> <%= comment.comment_email %> <br>
+                        <small class="text-muted"><%= comment.comment_text %></small>
+                    </div>
+                </div>
+                <%
+                });
+                }
+                %>
+            </div>
+            <ul class="pager">
+                <li><a href="#">上一页</a></li>
+                <li><a href="#">下一页</a></li>
+            </ul>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="message">
+            <div class="feed-activity-list" style="padding: 18px;">
+                <div class="feed-element"></div>
+                <%
+                if (typeof(messages) != "undefined") {
+                        messages.forEach(function(message) {
+                %>
+                <div class="feed-element">
+                    <div class="media-body ">
+                        <small class="pull-right"><%= tools.dateFormat(message.message_created, true) %></small>
+                        <strong><%= message.message_nickname %></strong> <%= message.message_email %> <br>
+                        <small class="text-muted"><%= message.message_text %></small>
+                    </div>
+                </div>
+                <%
+                });
+                }
+                %>
+            </div>
+            <ul class="pager">
+                <li><a href="#">上一页</a></li>
+                <li><a href="#">下一页</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<% include inc/footer.ejs %>

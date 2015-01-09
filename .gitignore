@@ -1,1 +1,4 @@
 steven/*
+node_modules/*
+uploads/*
+tests/*

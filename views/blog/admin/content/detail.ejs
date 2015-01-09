@@ -1,0 +1,69 @@
+<% include ../header.ejs %>
+
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12 col-md-12">
+                <ol class="breadcrumb">
+                    <li>
+                        <i class="fa fa-dashboard"></i>  <a href="/blog/admin"> 管理 </a>
+                    </li>
+                    <li>
+                        <i class="fa fa-share-alt"></i>  <a href="/blog/admin/content/1/index"> 文章列表 </a>
+                    </li>
+                    <li class="active">
+                        <i class="fa fa-share-alt-square"> 文章详细信息 </i>
+                    </li>
+                </ol>
+            </div>
+            <hr>
+            <div class="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2" style="box-shadow: 0 1px 0 #ccc;border: 1px solid #eee;padding: 0;">
+                <h3 style="border-top: 2px solid #00b4ff !important;height: 45px;background: #e7e7e7;margin: 0;padding: 5px 10px">文章详细信息</h3>
+                <div style="margin: 10px 0">
+                    <% if (typeof(error) !== 'undefined' && error) { %>
+                    <div class="alert alert-warning alert-dismissible fade in">
+                        <a class="close" data-dismiss="alert" href="#">&times;</a>
+                        <strong><%= error %></strong>
+                    </div>
+                    <% } %>
+                    <% if (typeof(success) !== 'undefined' && success) { %>
+                    <div class="alert alert-success alert-dismissible fade in">
+                        <a class="close" data-dismiss="alert" href="#">&times;</a>
+                        <strong><%= success %></strong>
+                    </div>
+                    <% } %>
+                </div>
+                <form role="form" method="post" action="/blog/admin/content/<%= content._id %>/update" style="padding: 10px">
+                    <fieldset>
+                        <div class="form-group">
+                            <label for="content_title" class="col-sm-3 col-md-2 control-label">标题</label>
+                            <div class="col-sm-9 col-md-10">
+                                <input type="text" class="form-control" name="content_title" id="content_title" placeholder="邮箱" value="<%= content.content_title %>">
+                            </div>
+                        </div>
+                        <br> <br>
+                        <div class="form-group">
+                            <label for="content_label" class="col-sm-3 col-md-2 control-label">网址</label>
+                            <div class="col-sm-9 col-md-10">
+                                <input type="text" class="form-control" name="content_label" id="content_label" placeholder="邮箱" value="<%= content.content_label%>">
+                            </div>
+                        </div>
+                        <br> <br>
+                        <div class="form-group">
+                            <label for="content_text" class="col-sm-3 col-md-2 control-label">网址</label>
+                            <textarea id="content_text" name="content_text" data-provide="markdown" rows="12"><%= content.content_text %></textarea>
+                        </div>
+                        <br> <br>
+                        <div style="background: #e7e7e7;">
+                            <div class="form-group col-xs-4 col-md-3 col-lg-2">
+                                <button type="submit" class="btn btn-info btn-block" data-loading-test="修改中">确定修改</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<% include ../footer.ejs %>
